@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="42c3087e-0f36-4c40-a62f-0791e1243a27" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NaiveBayes.py" beforeDir="false" afterPath="$PROJECT_DIR$/NaiveBayes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ngrams.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ngrams.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMclassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/SVMclassifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/Results.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/Results.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/embeddings_frequency_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/embeddings_frequency_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/embeddings_presence_bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/embeddings_presence_bigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/embeddings_presence_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/embeddings_presence_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/embeddings_presence_unigram+bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/embeddings_presence_unigram+bigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/model_frequency_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/model_frequency_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/model_presence_bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/model_presence_bigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/model_presence_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/model_presence_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/model_presence_unigram+bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/model_presence_unigram+bigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram0" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram1" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram2" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram3" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram4" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram5" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram6" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram7" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram8" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram9" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_frequency_unigram9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram0" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram1" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram2" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram3" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram4" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram5" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram6" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram7" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram8" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram9" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_bigram9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram0" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram1" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram2" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram3" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram4" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram5" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram6" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram7" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram8" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram9" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram+bigram9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram0" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram1" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram2" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram3" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram4" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram5" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram6" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram7" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram8" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram9" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/prediction_presence_unigram9" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/test_frequency_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/test_frequency_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/test_presence_bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/test_presence_bigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/test_presence_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/test_presence_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/test_presence_unigram+bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/test_presence_unigram+bigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/train_frequency_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/train_frequency_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/train_presence_bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/train_presence_bigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/train_presence_unigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/train_presence_unigram" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SVMlight/dataset/train_presence_unigram+bigram" beforeDir="false" afterPath="$PROJECT_DIR$/SVMlight/dataset/train_presence_unigram+bigram" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/NLPtask1$SVMclassifier.coverage" NAME="SVMclassifier Coverage Results" MODIFIED="1541523583911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NLPtask1$SignTest.coverage" NAME="SignTest Coverage Results" MODIFIED="1541524251934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NLPtask1$NaiveBayes.coverage" NAME="NaiveBayes Coverage Results" MODIFIED="1541522266700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NLPtask1$Ngrams.coverage" NAME="Ngrams Coverage Results" MODIFIED="1541512766944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1118495729">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="20" />
+          <entry key="project.open.time.0" value="4" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.22" value="1" />
+          <entry key="project.open.time.26" value="2" />
+          <entry key="project.open.time.27" value="1" />
+          <entry key="project.open.time.28" value="1" />
+          <entry key="project.open.time.30" value="1" />
+          <entry key="project.open.time.31" value="1" />
+          <entry key="project.open.time.32" value="1" />
+          <entry key="project.open.time.34" value="1" />
+          <entry key="project.open.time.35" value="1" />
+          <entry key="project.open.time.37" value="2" />
+          <entry key="project.open.time.40" value="1" />
+          <entry key="project.open.time.7" value="3" />
+          <entry key="project.opened" value="21" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="dat" value="2" />
+          <entry key="py" value="5" />
+          <entry key="tag" value="12" />
+          <entry key="txt" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JSP" value="12" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Python" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="19404" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="19404" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NaiveBayes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1263">
+              <caret line="140" selection-start-line="140" selection-end-line="140" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1541522739222" expanded="true" signature="3575:3635" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SignTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="502">
+              <caret line="60" column="74" selection-start-line="60" selection-start-column="74" selection-end-line="60" selection-end-column="74" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1541524251837" expanded="true" signature="168:962" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ngrams.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="173" selection-start-line="173" selection-end-line="174" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+                <element signature="e#467#1751#0" />
+                <marker date="1541522175975" expanded="true" signature="383:384" ph="..." />
+                <marker date="1541522175975" expanded="true" signature="478:482" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SVMclassifier.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="184" column="46" selection-start-line="184" selection-start-column="46" selection-end-line="184" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+                <marker date="1541523583801" expanded="true" signature="5888:6328" ph="..." />
+                <marker date="1541523583801" expanded="true" signature="6391:6395" ph="..." />
+                <marker date="1541523583801" expanded="true" signature="6670:6672" ph="..." />
+                <marker date="1541523583801" expanded="true" signature="6694:7334" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SVMlight/dataset/Results.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="936" selection-start-line="936" selection-end-line="936" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>accuracy</find>
+      <find>mortal</find>
+      <find>embedding</find>
+      <find>split</find>
+      <find>split_da</find>
+      <find>pos_folder</find>
+      <find>neg_folder</find>
+      <find>print</find>
+      <find>prin</find>
+      <find>stememd</find>
+      <find>train.da</find>
+      <find>train_file</find>
+      <find>test_file</find>
+      <find>trained_model</find>
+      <find>all_wo</find>
+      <find>svm_light_classify</find>
+      <find>12134</find>
+      <find>results</find>
+      <find>Accuracy</find>
+      <find>split_dataset</find>
+      <find>get_bigrams</find>
+      <find>get_unigrams</find>
+      <find>count</find>
+      <find>split_RR_dataset</find>
+      <find>sorted_dataset</find>
+      <find>trainset</find>
+      <find>all_docs_full_path</find>
+      <find>get_uni</find>
+      <find>get_bigr</find>
+      <find>get_big</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/SVMlight/dataset/Results.txt" />
+        <option value="$PROJECT_DIR$/Ngrams.py" />
+        <option value="$PROJECT_DIR$/NaiveBayes.py" />
+        <option value="$PROJECT_DIR$/SVMclassifier.py" />
+        <option value="$PROJECT_DIR$/SignTest.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="85" />
+    <option name="y" value="25" />
+    <option name="width" value="1750" />
+    <option name="height" value="970" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="NLPtask1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NLPtask1" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\PycharmProjects\NLPtask1" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.SignTest">
+    <configuration name="NaiveBayes" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="NLPtask1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NaiveBayes.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Ngrams" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="NLPtask1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Ngrams.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SVMclassifier" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <output_file path="$PROJECT_DIR$/SVMlight/dataset/Results.txt" is_save="true" />
+      <module name="NLPtask1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SVMclassifier.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SignTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="NLPtask1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SignTest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.NaiveBayes" />
+      <item itemvalue="Python.SVMclassifier" />
+      <item itemvalue="Python.Ngrams" />
+      <item itemvalue="Python.SignTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.SignTest" />
+        <item itemvalue="Python.SVMclassifier" />
+        <item itemvalue="Python.NaiveBayes" />
+        <item itemvalue="Python.Ngrams" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="42c3087e-0f36-4c40-a62f-0791e1243a27" name="Default Changelist" comment="" />
+      <created>1541007042465</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1541007042465</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16845638" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2592068" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.18838526" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/POS/cv001_18431.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-476" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/POS/cv000_29590.tag">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StemNeg/stemmed_cv003_12683.tag">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NEG/cv000_29416.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StemNeg/stemmed_cv000_29416.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12827" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StemNeg/stemmed_cv001_19502.tag">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-232" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StemPos/stemmed_cv000_29590.tag">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.dat" />
+    <entry file="file://$PROJECT_DIR$/test.dat" />
+    <entry file="file://$PROJECT_DIR$/SVMlight/dataset/Results.txt.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SVMlight/dataset/Results.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="936" selection-start-line="936" selection-end-line="936" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NaiveBayes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1263">
+          <caret line="140" selection-start-line="140" selection-end-line="140" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1541522739222" expanded="true" signature="3575:3635" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ngrams.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="173" selection-start-line="173" selection-end-line="174" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#467#1751#0" />
+            <marker date="1541522175975" expanded="true" signature="383:384" ph="..." />
+            <marker date="1541522175975" expanded="true" signature="478:482" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SVMclassifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="184" column="46" selection-start-line="184" selection-start-column="46" selection-end-line="184" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+            <marker date="1541523583801" expanded="true" signature="5888:6328" ph="..." />
+            <marker date="1541523583801" expanded="true" signature="6391:6395" ph="..." />
+            <marker date="1541523583801" expanded="true" signature="6670:6672" ph="..." />
+            <marker date="1541523583801" expanded="true" signature="6694:7334" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SignTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="60" column="74" selection-start-line="60" selection-start-column="74" selection-end-line="60" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1541524251837" expanded="true" signature="168:962" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

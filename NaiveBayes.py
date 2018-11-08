@@ -1,7 +1,7 @@
 import math
 import numpy as np
 from Ngrams import *
-from itertools import product
+
 
 
 # training set is a list of pairs: (string path of review, class)
@@ -9,8 +9,8 @@ from itertools import product
 # ngram_type ='unigram'/'bigram'/'unigram+bigram'
 def smoothed_ngram_probs(trainingset, smooth, ngram_type):
     pos_probs, neg_probs = {}, {}
-    ngram_counter, selected_ngrams = (unigram_class_count, get_unigrams(4, 1).keys()) if ngram_type == 'unigram' else (
-        bigram_class_count, (get_bigrams(7, 1).keys()))
+    ngram_counter, selected_ngrams = (unigram_class_count, get_cutoff_unigrams(4, 1).keys()) if ngram_type == 'unigram' else (
+        bigram_class_count, (get_cutoff_bigrams(7, 1).keys()))
 
     counts = ngram_counter(trainingset)
     pos_count, neg_count = counts['pcount'], counts['ncount']
@@ -85,12 +85,12 @@ def predict_with_bigrams(test_file_path, bigram_probs, bigram_selection):
 
 
 # prediction = predict_with_unigrams/predict_with_bigrams
-def accuracy(trainset, testset, ngram_selection, ngram_type, prediction):
+def accuracy(trainset, testset, ngram_selection, ngram_type, smooth):
     acc = 0
-    predictions = []
+    predict_results = []
     if ngram_type == 'unigram+bigram':
-        unigram_probs = smoothed_ngram_probs(trainset, smooth=1, ngram_type='unigram')
-        bigram_probs = smoothed_ngram_probs(trainset, smooth=1, ngram_type='bigram')
+        unigram_probs = smoothed_ngram_probs(trainset, smooth=smooth, ngram_type='unigram')
+        bigram_probs = smoothed_ngram_probs(trainset, smooth=smooth, ngram_type='bigram')
 
         for (test_file, sentiment) in testset:
             decision_unigram = predict_with_unigrams(test_file, unigram_probs, ngram_selection)
@@ -100,41 +100,47 @@ def accuracy(trainset, testset, ngram_selection, ngram_type, prediction):
             else:
                 result = 'positive'
             if result == sentiment: acc += 1
-            predictions.append(result)
+
+            predict_results.append(result)
     else:
-        ngram_probs = smoothed_ngram_probs(trainingset=trainset, smooth=1, ngram_type=ngram_type)
+        ngram_probs = smoothed_ngram_probs(trainingset=trainset, smooth=smooth, ngram_type=ngram_type)
+        predict = predict_with_unigrams if ngram_type == 'unigram' else predict_with_bigrams
         for (test_file, sentiment) in testset:
-            decision_prob = prediction(test_file, ngram_probs, ngram_selection)
-            result = 'negative' if decision_prob['neg'] > decision_prob['pos'] else 'positive'
+            decision_prob = predict(test_file, ngram_probs, ngram_selection)
+            if decision_prob['neg'] > decision_prob['pos']:
+                result = 'negative'
+            else:
+                result = 'positive'
+
             if result == sentiment: acc += 1
-            predictions.append(result)
+            predict_results.append(result)
 
-    return {'acc': acc / len(testset), 'predictions': predictions}
+    return {'acc_value': acc / len(testset), 'results': predict_results}
 
 
-def tenfold_RR_cv(metric, fold_nr, stem_flag, ngram_selection, ngram_type):
-    metric_avg = 0
+def tenfold_RR_cv(nr_of_folds, ngram_selection, ngram_type, smooth):
+    accuracy_avg = 0
+    limit = len(os.listdir(pos_rev_dir))
 
-    prediction = predict_with_unigrams if ngram_type == 'unigram' else predict_with_bigrams
-    class_rev_size = len(os.listdir(pos_rev_dir))
-
-    for i in range(fold_nr):
-        result_path = '../NLPtask1/NaiveBayes/prediction' + "_" + ngram_selection + "_" + ngram_type + str(i)
+    for iter in range(nr_of_folds):
+        result_path = '../NLPtask1/NaiveBayes/prediction' + "_" + ngram_selection + "_" + ngram_type + str(smooth)+ str(iter)
         result_file = open(result_path, 'w', encoding='UTF-8')
-        dataset = split_RR_dataset(i, 10, class_rev_size, stem_flag)
 
-        metric_res = metric(dataset['train'], dataset['test'], ngram_selection, ngram_type,
-                            prediction)
-        current_fold_score, predictions = metric_res['acc'], metric_res['predictions']
-        for result in predictions:
-            result_file.write(result + "\n")
-        metric_avg += current_fold_score
-    return metric_avg / fold_nr
+        dataset = split_RR_NB(iter, nr_of_folds, limit)
+        accuracy_result = accuracy(dataset['train'], dataset['test'], ngram_selection, ngram_type, smooth)
+        current_iter_accuracy, predictions = accuracy_result['acc_value'], accuracy_result['results']
+
+        for result in predictions: result_file.write(result + "\n")
+        accuracy_avg += current_iter_accuracy
+
+    return accuracy_avg / nr_of_folds
 
 
 if __name__ == "__main__":
-    for flag, selection, ngram_type in product({True}, {'presence', 'frequency'},
-                                               {'unigram', 'bigram', 'unigram+bigram'}):
-        print('The accuracy using cross-validation with NB using: ' + ('stemmed ' if flag else 'not stemmed ')
-              + 'dataset, ' + ngram_type + " based on " + selection)
-        print(tenfold_RR_cv(accuracy, 10, flag, selection, ngram_type))
+    models = [('presence', 'unigram'), ('frequency', 'unigram'), ('presence', 'bigram'), ('presence', 'unigram+bigram')]
+    for  ngram_selection, ngram_type in models:
+        print('The accuracy using cross-validation with sNB using: ' + ngram_type + " based on " + ngram_selection)
+        print(tenfold_RR_cv(10, ngram_selection, ngram_type, 1))
+        print('The accuracy using cross-validation with NB using: ' + ngram_type + " based on " + ngram_selection)
+        print(tenfold_RR_cv(10, ngram_selection, ngram_type, 0))
+

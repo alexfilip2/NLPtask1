@@ -14,12 +14,12 @@ def stem_all_reviews():
     if not os.path.exists(pos_stem_dir):
         os.makedirs(pos_stem_dir)
     else:
-        assert len(sorted(os.listdir(pos_stem_dir))) == len(sorted(os.listdir('../NLPtask1/POS')))
+        assert len(sorted(os.listdir(pos_stem_dir))) == len(sorted(os.listdir(pos_rev_dir)))
         return
     if not os.path.exists(neg_stem_dir):
         os.makedirs(neg_stem_dir)
     else:
-        assert len(sorted(os.listdir(neg_stem_dir))) == len(sorted(os.listdir('../NLPtask1/NEG')))
+        assert len(sorted(os.listdir(neg_stem_dir))) == len(sorted(os.listdir(neg_rev_dir)))
         return
 
     pos_reviews = sorted(os.listdir('../NLPtask1/POS'))
@@ -43,26 +43,17 @@ def stem_all_reviews():
 
 
 
-def split_RR_dataset(test_fold_id, train_test_ratio, limit, stem_flag):
+def split_RR_NB(test_fold_id, train_test_ratio, limit):
     train, test = [], []
-
-    if stem_flag:
-        pos_dir = pos_stem_dir
-        neg_dir = neg_stem_dir
-    else:
-        pos_dir = pos_rev_dir
-        neg_dir = neg_rev_dir
-
-    pos_reviews = sorted(os.listdir(pos_dir))
-    neg_reviews = sorted(os.listdir(neg_dir))
+    pos_reviews, neg_reviews = sorted(os.listdir(pos_stem_dir)), sorted(os.listdir(neg_stem_dir))
 
     for index, POS_review, NEG_review in zip(range(limit), pos_reviews, neg_reviews):
         if (index % train_test_ratio) == test_fold_id:
-            test.append((pos_dir + '/' + POS_review, 'positive'))
-            test.append((neg_dir + '/' + NEG_review, 'negative'))
+            test.append((pos_stem_dir + '/' + POS_review, 'positive'))
+            test.append((neg_stem_dir + '/' + NEG_review, 'negative'))
         else:
-            train.append((pos_dir + '/' + POS_review, 'positive'))
-            train.append((neg_dir + '/' + NEG_review, 'negative'))
+            train.append((pos_stem_dir + '/' + POS_review, 'positive'))
+            train.append((neg_stem_dir + '/' + NEG_review, 'negative'))
 
     train.sort(key=operator.itemgetter(1))
     test.sort(key=operator.itemgetter(1))
@@ -95,8 +86,8 @@ def unigram_class_count(training_set):
 
 
 # compute the set of unigrams that appear at least at_least_times in the whole corpus
-def get_unigrams(at_least_times, id_feature_start):
-    counts = unigram_class_count(split_RR_dataset(-1, 1, len(os.listdir(pos_stem_dir)), True)['train'])
+def get_cutoff_unigrams(at_least_times, id_feature_start):
+    counts = unigram_class_count(split_RR_NB(-1, 1, len(os.listdir(pos_stem_dir)))['train'])
 
     unique_unigrams = {}
     feature_id = id_feature_start
@@ -147,8 +138,8 @@ def bigram_class_count(trainingset):
 
 # compute the set of bigrams that appear at least at_least_times in the whole corpus
 # id_feature_start states from which integer we number the features (used for when we include bi+unigrams
-def get_bigrams(at_least_times, id_feature_start):
-    counts = bigram_class_count(split_RR_dataset(-1, 1, len(os.listdir(pos_stem_dir)), True)['train'])
+def get_cutoff_bigrams(at_least_times, id_feature_start):
+    counts = bigram_class_count(split_RR_NB(-1, 1, len(os.listdir(pos_stem_dir)))['train'])
     unique_bigrams = {}
     id = id_feature_start
     for review in all_docs_full_path:

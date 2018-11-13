@@ -1,13 +1,14 @@
 from stemming.porter2 import stem
 import os
 import operator
-pos_rev_dir = '../NLPtask1/POS'
-neg_rev_dir = '../NLPtask1/NEG'
-pos_stem_dir = '../NLPtask1/StemPos'
-neg_stem_dir = '../NLPtask1/StemNeg'
-all_docs_full_path = list(sorted(map(lambda x: pos_stem_dir + "/" + x, os.listdir(pos_stem_dir)))) + list(
-    sorted(map(lambda x: neg_stem_dir + "/" + x, os.listdir(neg_stem_dir))))
-
+# pos_rev_dir = '../NLPtask1/POS'
+pos_rev_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'POS')
+# neg_rev_dir = '../NLPtask1/NEG'
+neg_rev_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'NEG')
+#pos_stem_dir = '../NLPtask1/StemPos'
+pos_stem_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'StemPos')
+#neg_stem_dir = '../NLPtask1/StemNeg'
+neg_stem_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'StemNeg')
 
 # stem the initial review dataset using the Porter stemming algorithm
 def stem_all_reviews():
@@ -22,26 +23,28 @@ def stem_all_reviews():
         assert len(sorted(os.listdir(neg_stem_dir))) == len(sorted(os.listdir(neg_rev_dir)))
         return
 
-    pos_reviews = sorted(os.listdir('../NLPtask1/POS'))
-    neg_reviews = sorted(os.listdir('../NLPtask1/NEG'))
+    pos_reviews = sorted(os.listdir(pos_rev_dir))
+    neg_reviews = sorted(os.listdir(neg_rev_dir))
 
     for POS_review, NEG_review in zip(pos_reviews, neg_reviews):
-        new_pos_stemmed = open(pos_stem_dir + '/' + 'stemmed' + '_' + POS_review, "w", encoding='UTF-8')
-        new_neg_stemmed = open(neg_stem_dir + '/' + 'stemmed' + '_' + NEG_review, "w", encoding='UTF-8')
+        new_pos_stemmed = open(os.path.join(pos_stem_dir,'stemmed'+'_'+POS_review), "w", encoding='UTF-8')
+        new_neg_stemmed = open(os.path.join(neg_stem_dir, 'stemmed' + '_' + NEG_review), "w", encoding='UTF-8')
 
-        with open('../NLPtask1/POS/' + POS_review, "r", encoding='UTF-8') as file:
+        with open(os.path.join(pos_rev_dir, POS_review), "r", encoding='UTF-8') as file:
             for line in file:
                 for word in line.split():
-                    new_pos_stemmed.write(stem(word))
-            new_pos_stemmed.write("\n")
+                    new_pos_stemmed.write(stem(word) + "\n")
+             
 
-        with open('../NLPtask1/NEG/' + NEG_review, "r", encoding='UTF-8') as file:
+        with open(os.path.join(neg_rev_dir, NEG_review), "r", encoding='UTF-8') as file:
             for line in file:
                 for word in line.split():
-                    new_neg_stemmed.write(stem(word))
-            new_pos_stemmed.write("\n")
+                    new_neg_stemmed.write(stem(word) + "\n")
+            
 
-
+stem_all_reviews()
+all_docs_full_path = list(sorted(map(lambda x: os.path.join(pos_stem_dir,x) , os.listdir(pos_stem_dir)))) + list(
+    sorted(map(lambda x: os.path.join(neg_stem_dir,x), os.listdir(neg_stem_dir))))
 
 def split_RR_NB(test_fold_id, train_test_ratio, limit):
     train, test = [], []
@@ -49,11 +52,11 @@ def split_RR_NB(test_fold_id, train_test_ratio, limit):
 
     for index, POS_review, NEG_review in zip(range(limit), pos_reviews, neg_reviews):
         if (index % train_test_ratio) == test_fold_id:
-            test.append((pos_stem_dir + '/' + POS_review, 'positive'))
-            test.append((neg_stem_dir + '/' + NEG_review, 'negative'))
+            test.append((os.path.join(pos_stem_dir, POS_review), 'positive'))
+            test.append((os.path.join(neg_stem_dir, NEG_review), 'negative'))
         else:
-            train.append((pos_stem_dir + '/' + POS_review, 'positive'))
-            train.append((neg_stem_dir + '/' + NEG_review, 'negative'))
+            train.append((os.path.join(pos_stem_dir, POS_review), 'positive'))
+            train.append((os.path.join(neg_stem_dir, NEG_review), 'negative'))
 
     train.sort(key=operator.itemgetter(1))
     test.sort(key=operator.itemgetter(1))
@@ -161,6 +164,4 @@ def get_cutoff_bigrams(at_least_times, id_feature_start):
 
     return unique_bigrams
 
-
-if __name__ == "__main__":
-    stem_all_reviews()
+ 

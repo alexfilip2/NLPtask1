@@ -10,15 +10,17 @@ def extract_result(model, test_fold_nr):
     results = []
     if model['type'] == 'sNB' or model['type'] == 'NB':
         smooth = '0' if model['type'] == 'NB' else '1'
-        result_path = '../NLPtask1/NaiveBayes/prediction' + "_" + model['ngram_selection'] + "_" + model[
-            'ngram_type'] + smooth + str(test_fold_nr)
+        naive_dataset = os.path.join(os.getcwd(),os.pardir, 'NLPtask1','NaiveBayes')
+        result_path = os.path.join( naive_dataset, 'prediction' + "_" + model['ngram_selection'] + "_" + model[
+            'ngram_type'] + smooth + str(test_fold_nr))
         with open(result_path, 'r', encoding='UTF-8') as result_file:
             for line in result_file:
                 for word in line.split():
                     results.append(word)
     else:
-        result_path = '../NLPtask1/SVMlight/dataset/prediction' + "_" + model['ngram_selection'] + "_" + model[
-            'ngram_type'] + str(test_fold_nr)
+        svm_dataset = os.path.join(os.getcwd(),os.pardir, 'NLPtask1', 'SVMlight', 'dataset')
+        result_path = os.path.join(svm_dataset, 'prediction' + "_" + model['ngram_selection'] + "_" + model[
+            'ngram_type'] + str(test_fold_nr))
         with open(result_path, 'r', encoding='UTF-8') as result_file:
             for line in result_file:
                 for word in line.split():
@@ -52,5 +54,16 @@ def compute_p_value(model1, model2, test_fold_nr):
 
 
 if __name__ == "__main__":
+    print(compute_p_value({'type': 'sNB', 'ngram_selection': 'presence', 'ngram_type': 'unigram'},
+                              {'type': 'NB', 'ngram_selection': 'presence', 'ngram_type': 'unigram'}, 0))
+
+    print(compute_p_value({'type': 'sNB', 'ngram_selection': 'frequency', 'ngram_type': 'unigram'},
+                              {'type': 'sNB', 'ngram_selection': 'presence', 'ngram_type': 'unigram'}, 3))
+
+    print(compute_p_value({'type': 'SVM', 'ngram_selection': 'presence', 'ngram_type': 'unigram'},
+                              {'type': 'SVM', 'ngram_selection': 'frequency', 'ngram_type': 'unigram'}, 3))
+
     print(compute_p_value({'type': 'sNB', 'ngram_selection': 'presence', 'ngram_type': 'unigram+bigram'},
                               {'type': 'SVM', 'ngram_selection': 'presence', 'ngram_type': 'unigram+bigram'}, 0))
+
+

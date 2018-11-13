@@ -2,7 +2,7 @@ import math
 import numpy as np
 from Ngrams import *
 
-
+nb_dataset = os.path.join(os.getcwd(),os.pardir, 'NLPtask1','NaiveBayes')
 
 # training set is a list of pairs: (string path of review, class)
 # smooth = smoothing constant
@@ -123,7 +123,7 @@ def tenfold_RR_cv(nr_of_folds, ngram_selection, ngram_type, smooth):
     limit = len(os.listdir(pos_rev_dir))
 
     for iter in range(nr_of_folds):
-        result_path = '../NLPtask1/NaiveBayes/prediction' + "_" + ngram_selection + "_" + ngram_type + str(smooth)+ str(iter)
+        result_path = os.path.join(nb_dataset, 'prediction' + "_" + ngram_selection + "_" + ngram_type + str(smooth)+ str(iter))
         result_file = open(result_path, 'w', encoding='UTF-8')
 
         dataset = split_RR_NB(iter, nr_of_folds, limit)

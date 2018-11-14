@@ -1,14 +1,17 @@
 from stemming.porter2 import stem
 import os
 import operator
+import sys
+
 # pos_rev_dir = '../NLPtask1/POS'
 pos_rev_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'POS')
 # neg_rev_dir = '../NLPtask1/NEG'
 neg_rev_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'NEG')
-#pos_stem_dir = '../NLPtask1/StemPos'
+# pos_stem_dir = '../NLPtask1/StemPos'
 pos_stem_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'StemPos')
-#neg_stem_dir = '../NLPtask1/StemNeg'
+# neg_stem_dir = '../NLPtask1/StemNeg'
 neg_stem_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'StemNeg')
+
 
 # stem the initial review dataset using the Porter stemming algorithm
 def stem_all_reviews():
@@ -16,35 +19,39 @@ def stem_all_reviews():
         os.makedirs(pos_stem_dir)
     else:
         assert len(sorted(os.listdir(pos_stem_dir))) == len(sorted(os.listdir(pos_rev_dir)))
-        return
+        print("All the positive reviews are already stemmed.", file=sys.stdout)
     if not os.path.exists(neg_stem_dir):
         os.makedirs(neg_stem_dir)
     else:
         assert len(sorted(os.listdir(neg_stem_dir))) == len(sorted(os.listdir(neg_rev_dir)))
+        print("All the negative reviews are already stemmed.", file=sys.stdout)
         return
-
+    print("Start stemming of the review dataset...", file=sys.stdout)
     pos_reviews = sorted(os.listdir(pos_rev_dir))
     neg_reviews = sorted(os.listdir(neg_rev_dir))
 
     for POS_review, NEG_review in zip(pos_reviews, neg_reviews):
-        new_pos_stemmed = open(os.path.join(pos_stem_dir,'stemmed'+'_'+POS_review), "w", encoding='UTF-8')
+        new_pos_stemmed = open(os.path.join(pos_stem_dir, 'stemmed' + '_' + POS_review), "w", encoding='UTF-8')
         new_neg_stemmed = open(os.path.join(neg_stem_dir, 'stemmed' + '_' + NEG_review), "w", encoding='UTF-8')
 
         with open(os.path.join(pos_rev_dir, POS_review), "r", encoding='UTF-8') as file:
             for line in file:
                 for word in line.split():
                     new_pos_stemmed.write(stem(word) + "\n")
-             
 
         with open(os.path.join(neg_rev_dir, NEG_review), "r", encoding='UTF-8') as file:
             for line in file:
                 for word in line.split():
                     new_neg_stemmed.write(stem(word) + "\n")
-            
+
+        new_pos_stemmed.close()
+        new_neg_stemmed.close()
+
 
 stem_all_reviews()
-all_docs_full_path = list(sorted(map(lambda x: os.path.join(pos_stem_dir,x) , os.listdir(pos_stem_dir)))) + list(
-    sorted(map(lambda x: os.path.join(neg_stem_dir,x), os.listdir(neg_stem_dir))))
+all_docs_full_path = list(sorted(map(lambda x: os.path.join(pos_stem_dir, x), os.listdir(pos_stem_dir)))) + list(
+    sorted(map(lambda x: os.path.join(neg_stem_dir, x), os.listdir(neg_stem_dir))))
+
 
 def split_RR_NB(test_fold_id, train_test_ratio, limit):
     train, test = [], []
@@ -70,7 +77,7 @@ def split_RR_NB(test_fold_id, train_test_ratio, limit):
 def unigram_class_count(training_set):
     pos_unigram_count, neg_unigram_count = {}, {}
 
-    for (review,sentiment) in training_set:
+    for (review, sentiment) in training_set:
         with open(review, "r", encoding='UTF-8') as review_file:
             for line in review_file:
                 for word in line.split():
@@ -115,7 +122,7 @@ def get_cutoff_unigrams(at_least_times, id_feature_start):
 def bigram_class_count(trainingset):
     pos_bigram_count, neg_bigram_count = {}, {}
 
-    for (review,sentiment) in trainingset:
+    for (review, sentiment) in trainingset:
         with open(review, "r", encoding='UTF-8') as review_file:
             first_word = review_file.readline()
             for line in review_file:
@@ -163,5 +170,3 @@ def get_cutoff_bigrams(at_least_times, id_feature_start):
                     first_word = second_word
 
     return unique_bigrams
-
- 

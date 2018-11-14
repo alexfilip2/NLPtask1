@@ -1,0 +1,9 @@
+The Naive Bayes classifier is run using the Python file NaiveBayes.py which stemms the dataset if needed.
+The accuracy results of the cross validation are written into the NaiveBayesAccuracies file.
+
+The SVM classifier is run using the Python file SVMclassifier.py which stemms the dataset if needed.
+The accuracy results of the cross validation are written into the SVMAccuracies file.
+
+The sign test comparison is run using the Python file SignTest.py, which should be run AFTER the SVM and NaiveBayes
+classifiers.
+Its results are written in the SignTestResults file, including on-split p-values for each comparison.

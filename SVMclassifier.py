@@ -3,13 +3,17 @@ from Ngrams import *
 from pathlib import Path
 import operator
 from itertools import product
-import sys 
+import sys
 
 root_dir = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'SVMlight')
 svm_light_learn, svm_light_classify = os.path.join(root_dir, 'svm_learn'), os.path.join(root_dir, 'svm_classify')
 data_root_dir = os.path.join(root_dir, 'dataset')
+if not os.path.exists(data_root_dir):
+    os.makedirs(data_root_dir)
 emb_data_file = os.path.join(data_root_dir, 'embeddings')
-subprocess_stdout = open(os.path.join(data_root_dir,'Results.txt'), 'w')
+
+svm_result_file = open(os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'SVMAccuracies'), 'w', encoding='UTF-8')
+
 
 def embedding_unigram(review_path, sentiment_class, cutoff_unigrams, ngram_selection):
     # sent_class is either '+1' or '-1'
@@ -61,7 +65,7 @@ def embedding_bigram(review_path, sentiment_class, cutoff_bigrams, ngram_selecti
     return str_embedd
 
 
-def create_embedding_dataset(ngram_selection, ngram_type, u_cutoff, b_cutoff ):
+def create_embedding_dataset(ngram_selection, ngram_type, u_cutoff, b_cutoff):
     doc_dataset = split_RR_NB(-1, 1, len(os.listdir(pos_stem_dir)))['train']
     embedding_dataset = open(emb_data_file + '_' + ngram_selection + '_' + ngram_type, "w", encoding='UTF-8')
 
@@ -101,24 +105,30 @@ def split_RR_embeddings(test_fold_id, train_test_ratio, ngram_selection, ngram_t
 def train(ngram_selection, ngram_type):
     # create model file
     model_type = '_' + ngram_selection + "_" + ngram_type
-    train_file = os.path.join( data_root_dir, 'train' + model_type)
+    train_file = os.path.join(data_root_dir, 'train' + model_type)
     model_path = os.path.join(data_root_dir, 'model' + model_type)
     # create the model file if not existing
     model_file = open(model_path, "w", encoding='UTF-8')
     # call the executable for SVM training
-    subprocess.call((svm_light_learn + " -z c -m 100 " + train_file + " " + model_path), shell=True)
+    subprocess_stdout = open(os.path.join(root_dir, 'intermediate_results'), 'a', encoding='UTF-8')
+    subprocess.call((svm_light_learn + " -z c -m 100 " + train_file + " " + model_path), shell=True,
+                    stdout=subprocess_stdout)
+    subprocess_stdout.close()
     model_file.close()
 
 
 def evaluate(ngram_selection, ngram_type, split_nr):
     model_type = '_' + ngram_selection + "_" + ngram_type
-    model_path = os.path.join(data_root_dir , 'model' + model_type)
+    model_path = os.path.join(data_root_dir, 'model' + model_type)
     test_file = os.path.join(data_root_dir, 'test' + model_type)
     result_path = os.path.join(data_root_dir, 'prediction' + model_type + str(split_nr))
     # create the prediction result file if not existing
     results_file = open(result_path, "w", encoding='UTF-8')
     # call the executable for SVM testing
-    subprocess.call((svm_light_classify + " " + test_file + " " + model_path + " " + result_path), shell=True, stdout = subprocess_stdout)
+    subprocess_stdout = open(os.path.join(root_dir, 'intermediate_results'), 'a', encoding='UTF-8')
+    subprocess.call((svm_light_classify + " " + test_file + " " + model_path + " " + result_path), shell=True,
+                    stdout=subprocess_stdout)
+    subprocess_stdout.close()
     results_file.close()
 
 
@@ -130,7 +140,7 @@ def cross_validation_SVM(nr_of_folds, ngram_selection, ngram_type):
 
 
 def validation():
-    for u_cutoff, b_cutoff in product(range(1, 4), range(2,7)):
+    for u_cutoff, b_cutoff in product(range(1, 4), range(2, 7)):
         create_embedding_dataset('presence', 'unigram+bigram', u_cutoff, b_cutoff)
         print('The cutoffs are for unigrams ' + str(u_cutoff) + ' and for bigrams ' + str(b_cutoff))
         print('Results for the SVM model presence unigram+bigram')
@@ -139,39 +149,46 @@ def validation():
 
 
 def summary_results(nr_of_folds):
-    result_file = open(os.path.join(data_root_dir,'Results.txt'), 'r', encoding='UTF-8')
+    interm_results = open(os.path.join(root_dir, 'intermediate_results'), 'r', encoding='UTF-8')
     acc = 0
     fold = 0
-    for line in result_file:
-
+    model = ''
+    for line in interm_results:
+        if line.split()[0] == 'Running':
+            model = line.split()[4] + ' ' + line.split()[5]
         if line.split()[0] == 'Accuracy':
             fold += 1
             acc += float(line.split()[4].split('%')[0])
-
         if fold == nr_of_folds:
-            print('accuracy is ' + str(acc / nr_of_folds))
+            print('Accuracy for the SVM classiffier based on ' + model + ' is ' + str(acc / nr_of_folds),
+                  file=svm_result_file)
             acc = 0
             fold = 0
 
 
 if __name__ == "__main__":
     models = [('presence', 'unigram'), ('frequency', 'unigram'), ('presence', 'bigram'), ('presence', 'unigram+bigram')]
+    folds = 10
+    u_cutoff = 4
+    b_cuttof = 7
+
     for ngram_selection, ngram_type in models:
         dataset = Path(emb_data_file + '_' + ngram_selection + '_' + ngram_type)
         if not dataset.is_file():
-            create_embedding_dataset(ngram_selection, ngram_type, 4, 7)
+            print("Create embeddings based on " + ngram_selection + ' ' + ngram_type)
+            create_embedding_dataset(ngram_selection, ngram_type, u_cutoff, b_cuttof)
         else:
             print('Already created ' + ngram_selection + ' ' + ngram_type + ' embeddings')
-    
-    print('Results for the SVM model frequency unigram')
-    cross_validation_SVM(10, 'frequency', 'unigram')
-    print('Results for the SVM model presence unigram')
-    cross_validation_SVM(10, 'presence', 'unigram')    
-    print('Results for the SVM model presence bigram')
-    cross_validation_SVM(10, 'presence', 'bigram')
-    print('Results for the SVM model presence unigram+bigram')
-    cross_validation_SVM(10, 'presence', 'unigram+bigram')
-   
-    #validation()
-    summary_results(10)
-    
+
+    subprocess_stdout = open(os.path.join(root_dir, 'intermediate_results'), 'w', encoding='UTF-8')
+    for ngram_selection, ngram_type in models:
+        subprocess_stdout = open(os.path.join(root_dir, 'intermediate_results'), 'a', encoding='UTF-8')
+        print('Running the SVM model ' + ngram_selection + ' ' + ngram_type, file=subprocess_stdout)
+        subprocess_stdout.close()
+        print('Evaluating the SVM model ' + ngram_selection + ' ' + ngram_type + '...')
+        cross_validation_SVM(10, ngram_selection, ngram_type)
+
+    print('Evaluation is complete. The results have been written to ' + 'NLPtask1/SVMAccuracies')
+    subprocess_stdout.close()
+    # validation()
+    summary_results(folds)

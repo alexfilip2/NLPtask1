@@ -1,16 +1,27 @@
 import math
 import numpy as np
 from Ngrams import *
+import sys
 
-nb_dataset = os.path.join(os.getcwd(),os.pardir, 'NLPtask1','NaiveBayes')
+nb_result_file = open(os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'NaiveBayesAccuracies'), 'w', encoding='UTF-8')
+std_out = sys.stdout
+sys.stdout = nb_result_file
+
+nb_dataset = os.path.join(os.getcwd(), os.pardir, 'NLPtask1', 'NaiveBayes')
+if not os.path.exists(nb_dataset):
+    os.makedirs(nb_dataset)
+
+selected_unigrams = get_cutoff_unigrams(4, 1).keys()
+selected_bigrams = get_cutoff_bigrams(7, 1).keys()
+
 
 # training set is a list of pairs: (string path of review, class)
 # smooth = smoothing constant
 # ngram_type ='unigram'/'bigram'/'unigram+bigram'
 def smoothed_ngram_probs(trainingset, smooth, ngram_type):
     pos_probs, neg_probs = {}, {}
-    ngram_counter, selected_ngrams = (unigram_class_count, get_cutoff_unigrams(4, 1).keys()) if ngram_type == 'unigram' else (
-        bigram_class_count, (get_cutoff_bigrams(7, 1).keys()))
+    ngram_counter, selected_ngrams = (unigram_class_count, selected_unigrams) if ngram_type == 'unigram' else (
+        bigram_class_count, selected_bigrams)
 
     counts = ngram_counter(trainingset)
     pos_count, neg_count = counts['pcount'], counts['ncount']
@@ -30,7 +41,7 @@ def smoothed_ngram_probs(trainingset, smooth, ngram_type):
         if ngram not in pos_count.keys():
             pos_probs[ngram] = smooth / total_count_pos
 
-    return {'pprob': pos_probs, 'nprob': neg_probs}
+    return {'p_prob': pos_probs, 'n_prob': neg_probs}
 
 
 # test_file_path = string path of a review for testing
@@ -50,10 +61,10 @@ def predict_with_unigrams(test_rev_path, unigram_probs, unigram_selection):
                     else:
                         continue
 
-                if word in unigram_probs['pprob'].keys() and unigram_probs['pprob'][word] > 0:
-                    rev_pos_prob += math.log10(unigram_probs['pprob'][word])
-                if word in unigram_probs['nprob'].keys() and unigram_probs['nprob'][word] > 0:
-                    rev_neg_prob += math.log10(unigram_probs['nprob'][word])
+                if word in unigram_probs['p_prob'].keys() and unigram_probs['p_prob'][word] > 0:
+                    rev_pos_prob += math.log10(unigram_probs['p_prob'][word])
+                if word in unigram_probs['n_prob'].keys() and unigram_probs['n_prob'][word] > 0:
+                    rev_neg_prob += math.log10(unigram_probs['n_prob'][word])
 
     return {'pos': rev_pos_prob, 'neg': rev_neg_prob}
 
@@ -75,10 +86,10 @@ def predict_with_bigrams(test_file_path, bigram_probs, bigram_selection):
                         first_word = second_word
                         continue
 
-                if bigram in bigram_probs['pprob'].keys() and bigram_probs['pprob'][bigram] > 0:
-                    rev_pos_prob += math.log10(bigram_probs['pprob'][bigram])
-                if bigram in bigram_probs['nprob'].keys() and bigram_probs['nprob'][bigram] > 0:
-                    rev_neg_prob += math.log10(bigram_probs['nprob'][bigram])
+                if bigram in bigram_probs['p_prob'].keys() and bigram_probs['p_prob'][bigram] > 0:
+                    rev_pos_prob += math.log10(bigram_probs['p_prob'][bigram])
+                if bigram in bigram_probs['n_prob'].keys() and bigram_probs['n_prob'][bigram] > 0:
+                    rev_neg_prob += math.log10(bigram_probs['n_prob'][bigram])
                 first_word = second_word
 
     return {'pos': rev_pos_prob, 'neg': rev_neg_prob}
@@ -120,10 +131,19 @@ def accuracy(trainset, testset, ngram_selection, ngram_type, smooth):
 
 def tenfold_RR_cv(nr_of_folds, ngram_selection, ngram_type, smooth):
     accuracy_avg = 0
-    limit = len(os.listdir(pos_rev_dir))
+    limit = len(os.listdir(pos_stem_dir))
+
+    if ngram_type == 'unigram':
+        feat_number = len(selected_unigrams)
+    elif ngram_type == 'bigram':
+        feat_number = len(selected_bigrams)
+    else:
+        feat_number = len(selected_unigrams) + len(selected_bigrams)
+    print("The number of features used is: " + str(feat_number))
 
     for iter in range(nr_of_folds):
-        result_path = os.path.join(nb_dataset, 'prediction' + "_" + ngram_selection + "_" + ngram_type + str(smooth)+ str(iter))
+        result_path = os.path.join(nb_dataset,
+                                   'prediction' + "_" + ngram_selection + "_" + ngram_type + str(smooth) + str(iter))
         result_file = open(result_path, 'w', encoding='UTF-8')
 
         dataset = split_RR_NB(iter, nr_of_folds, limit)
@@ -131,6 +151,8 @@ def tenfold_RR_cv(nr_of_folds, ngram_selection, ngram_type, smooth):
         current_iter_accuracy, predictions = accuracy_result['acc_value'], accuracy_result['results']
 
         for result in predictions: result_file.write(result + "\n")
+        result_file.close()
+
         accuracy_avg += current_iter_accuracy
 
     return accuracy_avg / nr_of_folds
@@ -138,9 +160,12 @@ def tenfold_RR_cv(nr_of_folds, ngram_selection, ngram_type, smooth):
 
 if __name__ == "__main__":
     models = [('presence', 'unigram'), ('frequency', 'unigram'), ('presence', 'bigram'), ('presence', 'unigram+bigram')]
-    for  ngram_selection, ngram_type in models:
+    for ngram_selection, ngram_type in models:
         print('The accuracy using cross-validation with sNB using: ' + ngram_type + " based on " + ngram_selection)
         print(tenfold_RR_cv(10, ngram_selection, ngram_type, 1))
+        print()
         print('The accuracy using cross-validation with NB using: ' + ngram_type + " based on " + ngram_selection)
         print(tenfold_RR_cv(10, ngram_selection, ngram_type, 0))
-
+        print()
+    print('Evaluation is complete. The results have been written to ' + 'NLPtask1/NaiveBayesAccuracies', file=std_out)
+    nb_result_file.close()
